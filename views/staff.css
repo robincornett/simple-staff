@@ -1,0 +1,53 @@
+.entry .thumb {
+	float: left;
+	margin: 0;
+	padding: 2px;
+	width: 20%;
+}
+
+.entry .thumb h4 {
+	font-size: 16px;
+	text-align: center;
+}
+
+.staff {
+	padding: 0;
+}
+
+.active-desc {
+	float: right;
+	padding: 0;
+	width: 78%;
+}
+
+.active-desc img {
+	border-radius: 50%;
+}
+
+.after-staff {
+	background: #fff;
+	padding: 40px;
+}
+
+@media only screen and (max-width: 1139px) {
+
+}
+
+@media only screen and (max-width: 1023px) {
+
+	.entry .thumb {
+		width: 12.5%;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+
+	.entry .thumb {
+		width: 120px;
+	}
+
+	.active-desc {
+		width: 100%;
+	}
+
+}
