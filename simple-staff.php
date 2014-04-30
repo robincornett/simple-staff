@@ -36,8 +36,8 @@ function simple_staff_post_type() {
 
 	$supports = array( 'title', 'editor', 'thumbnail', 'genesis-cpt-archives-settings', 'page-attributes', 'genesis-seo' );
 
-    $post_type_args = array(
-    	'labels'              => $labels,
+	$post_type_args = array(
+		'labels'              => $labels,
 		'menu_icon'           => 'dashicons-groups',
 		'exclude_from_search' => false,
 		'has_archive'         => true,
@@ -95,12 +95,12 @@ add_action( 'widgets_init', 'simple_staff_register_widget' );
  */
 function simple_staff_register_widget() {
 	register_sidebar( array(
-		'id'				=> 'after-staff',
-		'name'			=> __( 'After Staff', 'simple-staff' ),
-		'description'	=> __( 'This is a widget area which will show after the staff archive page or single staff entry content.', 'simple-staff' ),
+		'id'            => 'after-staff',
+		'name'          => __( 'After Staff', 'simple-staff' ),
+		'description'   => __( 'This is a widget area which will show after the staff archive page or single staff entry content.', 'simple-staff' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>'
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => '</h4>'
 	) );
 }
