@@ -45,9 +45,36 @@ function simple_staff_post_type() {
 		'public'              => true,
 		'rewrite'             => array( 'slug' => 'staff' ),
 		'supports'            => $supports,
+		'taxonomies'          => array( 'department' ),
 	);
 
 	register_post_type( 'staff', $post_type_args );
+}
+
+// Department taxonomy
+add_action( 'init', 'simple_staff_taxonomy' );
+function simple_staff_taxonomy() {
+	$taxonomy_args = array(
+		'labels'    => array(
+			'name'         => __( 'Departments', 'simple-staff' ),
+			'add_new_item' => __( 'Add New Department', 'simple-staff' ),
+			),
+		'exclude_from_search' => true,
+		'has_archive'         => false,
+		'rewrite'             => array( 'slug' => 'department', 'with_front' => false ),
+		'show_tagcloud'       => false,
+	);
+
+	register_taxonomy( 'department', 'staff', $taxonomy_args );
+}
+
+// Show the department as a column
+add_filter( 'manage_taxonomies_for_staff_columns', 'simple_staff_show_column' );
+function simple_staff_show_column( $taxonomies ) {
+
+	$taxonomies[] = 'department';
+	return $taxonomies;
+
 }
 
 add_action( 'wp_enqueue_scripts', 'simple_staff_script' );
