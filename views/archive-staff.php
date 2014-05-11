@@ -16,6 +16,7 @@ function simple_staff_archive_loop() {
 
 
 	if ( have_posts() ) :
+		echo '<div class="descriptions">';
 		while ( have_posts() ) : the_post();
 
 			if( 0 == $wp_query->current_post ) { ?>
@@ -31,6 +32,13 @@ function simple_staff_archive_loop() {
 
 			echo '</article>';
 		endwhile;
+
+		if ( is_active_sidebar( 'after-staff' ) ) {
+			echo '<div class="after-staff">';
+			genesis_widget_area( 'after-staff' );
+			echo '</div>';
+		}
+		echo '</div>';
 
 	endif;
 
@@ -51,15 +59,6 @@ function simple_staff_archive_loop() {
 	endif;
 
 	echo '</div>'; // close desc-wrapper and entry
-}
-
-add_action( 'genesis_after_loop', 'simple_staff_sidebar' );
-function simple_staff_sidebar() {
-	if ( is_active_sidebar( 'after-staff' ) ) {
-		echo '<div class="after-staff">';
-		genesis_widget_area( 'after-staff' );
-		echo '</div>';
-	}
 }
 
 genesis();

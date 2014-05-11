@@ -6,7 +6,9 @@ WordPress plugin that adds a custom post type for staff.
 
 This plugin registers a simple custom post type for staff. I wrote it for WordCamp Nashville 2014.
 
-If your site is running a Genesis Framework child theme, this plugin includes a template for the archive page. If you're not running the Genesis Framework, you can create your own templates for these in your theme. If you don't like my templates, comment out lines 52 and 73 in simple-staff.php file. This will remove the style, script, and template loaded by the plugin.
+If your site is running a Genesis Framework child theme, this plugin includes a template for the archive page. If you're not running the Genesis Framework, you can create your own templates for these in your theme. If you don't like my templates, comment out lines 80 and 101 in simple-staff.php file. This will remove the style, script, and template loaded by the plugin.
+
+Alternatively, if you are running a Genesis Framework child theme and want to make your own template, the plugin now handles this better. Add your template (archive-staff.php or single-staff.php) to your theme and the plugin will use that instead of its own template, so you don't need to comment out any lines at all.
 
 Demo: http://milne.robincornettcreative.com/staff/
 
@@ -51,3 +53,8 @@ I've used variations of this code in several iterations--doing it wrong (by hand
 
 Built by [Robin Cornett](http://www.robincornett.com/)
 and with help from [David Gale](http://davidsgale.com/)
+
+## Changelog
+
+1.0.0 initial release
+1.1.0 reworked archive template so widget would be more gracefully placed; also set up better conditionals for plugin templates.

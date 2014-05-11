@@ -14,7 +14,7 @@
 	padding: 0;
 }
 
-.active-desc {
+.descriptions {
 	float: right;
 	padding: 0;
 	width: 78%;
@@ -26,7 +26,6 @@
 
 .after-staff {
 	background: #fff;
-	padding: 40px;
 }
 
 @media only screen and (max-width: 1139px) {
@@ -46,7 +45,7 @@
 		width: 120px;
 	}
 
-	.active-desc {
+	.descriptions {
 		width: 100%;
 	}
 
