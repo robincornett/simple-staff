@@ -79,7 +79,7 @@ function simple_staff_show_column( $taxonomies ) {
 
 add_action( 'wp_enqueue_scripts', 'simple_staff_script' );
 function simple_staff_script() {
-	if( is_post_type_archive( 'staff' ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
+	if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
 		wp_enqueue_script( 'staff-fader', plugins_url( 'views/staff.js', __FILE__ ), array( 'jquery' ), false, false );
 		wp_enqueue_style( 'staff-style', plugins_url( 'views/staff.css', __FILE__ ), array(), 1.0 );
 	}
@@ -101,7 +101,7 @@ function simple_staff_order( $query ) {
 add_filter( 'template_include', 'simple_staff_load_custom_templates' );
 function simple_staff_load_custom_templates( $original_template ) {
 	if ( basename( get_template_directory() ) == 'genesis' ) {
-		if ( is_post_type_archive( 'staff' ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
+		if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
 			return SIMPLE_STAFF . '/views/archive-staff.php';
 		}
 		elseif ( is_singular( 'staff' ) && ( locate_template( 'single-staff.php' ) == '' ) ) {

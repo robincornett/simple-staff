@@ -28,6 +28,10 @@ function simple_staff_archive_loop() {
 			}
 			echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
 			echo get_the_post_thumbnail( $post->ID, 'medium', array( 'class' => 'alignright' ) );
+			$department = get_the_term_list( $post->ID, 'department', '', ' ,', '' );
+			if ( $department ) {
+				echo '<h4>Department: ' . $department . '</h4>';
+			}
 			echo the_content();
 
 			echo '</article>';

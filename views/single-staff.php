@@ -9,16 +9,20 @@ add_action( 'genesis_entry_content', 'simple_staff_entry_content', 12 );
 function simple_staff_entry_content() {
 	global $post;
 
+	$department = get_the_term_list( $post->ID, 'department', '', ' ,', '' );
+	if ( $department ) {
+		echo '<h4>Department: ' . $department . '</h4>';
+	}
 	echo get_the_post_thumbnail( $post->ID, 'medium', array( 'class' => 'alignright' ) );
 	echo the_content();
 }
 
-add_action( 'genesis_after_entry', 'simple_staff_sidebar' );
+add_action( 'genesis_entry_content', 'simple_staff_sidebar', 20 );
 function simple_staff_sidebar() {
-if ( is_active_sidebar( 'after-staff' ) ) {
-			echo '<div class="after-staff">';
-			genesis_widget_area( 'after-staff' );
-			echo '</div>';
+	if ( is_active_sidebar( 'after-staff' ) ) {
+		echo '<div class="after-staff">';
+		genesis_widget_area( 'after-staff' );
+		echo '</div>';
 	}
 }
 
