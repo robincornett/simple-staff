@@ -87,7 +87,7 @@ function simple_staff_script() {
 
 add_action( 'pre_get_posts', 'simple_staff_order', 9999 );
 function simple_staff_order( $query ) {
-	if ( $query->is_main_query() && is_post_type_archive( 'staff' ) ) {
+	if ( $query->is_main_query() && ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) ) {
 		$query->set( 'orderby', 'menu_order' );
 		$query->set( 'order', 'ASC' );
 		$query->set( 'posts_per_page', -1 );
