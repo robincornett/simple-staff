@@ -5,15 +5,12 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 
 add_action( 'genesis_entry_content', 'simple_staff_entry_content', 12 );
-
 function simple_staff_entry_content() {
-	global $post;
-
-	$department = get_the_term_list( $post->ID, 'department', '', ' ,', '' );
+	$department = get_the_term_list( get_the_ID(), 'department', '', ' ,', '' );
 	if ( $department ) {
 		echo '<h4>Department: ' . $department . '</h4>';
 	}
-	echo get_the_post_thumbnail( $post->ID, 'medium', array( 'class' => 'alignright' ) );
+	echo get_the_post_thumbnail( get_the_ID(), 'medium', array( 'class' => 'alignright' ) );
 	echo the_content();
 }
 
