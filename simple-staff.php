@@ -80,8 +80,10 @@ function simple_staff_show_column( $taxonomies ) {
 add_action( 'wp_enqueue_scripts', 'simple_staff_script' );
 function simple_staff_script() {
 	if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
-		wp_enqueue_script( 'staff-fader', plugins_url( 'views/staff.js', __FILE__ ), array( 'jquery' ), false, false );
-		wp_enqueue_style( 'staff-style', plugins_url( 'views/staff.css', __FILE__ ), array(), 1.0 );
+		$js_file  = apply_filters( 'simple_staff_js', plugins_url( '/views/staff.js', __FILE__ ) );
+		$css_file = apply_filters( 'simple_staff_css', plugins_url( '/views/staff.css', __FILE__ ) );
+		wp_enqueue_script( 'staff-fader', $js_file, array( 'jquery' ), '1.1.0', true );
+		wp_enqueue_style( 'staff-style', $css_file, array(), '1.1.0' );
 	}
 }
 
