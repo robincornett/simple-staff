@@ -79,7 +79,7 @@ function simple_staff_show_column( $taxonomies ) {
 
 add_action( 'wp_enqueue_scripts', 'simple_staff_script' );
 function simple_staff_script() {
-	if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
+	if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) ) {
 		$js_file  = apply_filters( 'simple_staff_js', plugins_url( '/views/staff.js', __FILE__ ) );
 		$css_file = apply_filters( 'simple_staff_css', plugins_url( '/views/staff.css', __FILE__ ) );
 		wp_enqueue_script( 'staff-fader', $js_file, array( 'jquery' ), '1.1.0', true );
@@ -100,22 +100,28 @@ function simple_staff_order( $query ) {
  * Template Redirect
  * Use plugin templates for custom post types.
  */
-add_filter( 'template_include', 'simple_staff_load_custom_templates' );
-function simple_staff_load_custom_templates( $original_template ) {
-	if ( basename( get_template_directory() ) == 'genesis' ) {
-		if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) && ( locate_template( 'archive-staff.php' ) == '' ) ) {
-			return SIMPLE_STAFF . '/views/archive-staff.php';
-		}
-		elseif ( is_singular( 'staff' ) && ( locate_template( 'single-staff.php' ) == '' ) ) {
-			return SIMPLE_STAFF . '/views/single-staff.php';
-		}
-		else {
-			return $original_template;
-		}
+add_action( 'after_setup_theme', 'simple_staff_load_templates' );
+function simple_staff_load_templates() {
+	$parent = basename( get_template_directory() );
+	if ( 'genesis' !== $parent ) {
+		return;
 	}
-	else {
-		return $original_template;
+	add_filter( 'archive_template', 'simple_staff_load_archive_template' );
+	add_filter( 'single_template', 'simple_staff_load_single_template' );
+}
+
+function simple_staff_load_archive_template( $archive_template ) {
+	if ( ( is_post_type_archive( 'staff' ) || is_tax( 'department' ) ) && locate_template( '' !== 'archive-staff.php' ) ) {
+		$archive_template = plugin_dir_path( __FILE__ ) . '/views/archive-staff.php';
 	}
+	return $archive_template;
+}
+
+function simple_staff_load_single_template( $single_template ) {
+	if ( is_singular( 'staff' ) && locate_template( '' !== 'single-staff.php' ) ) {
+		$single_template = plugin_dir_path( __FILE__ ) . '/views/single-staff.php';
+	}
+	return $single_template;
 }
 
 add_action( 'widgets_init', 'simple_staff_register_widget' );
