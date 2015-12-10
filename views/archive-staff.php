@@ -14,7 +14,6 @@ function simple_staff_archive_loop() {
 
 	global $wp_query, $post;
 
-
 	if ( have_posts() ) :
 		echo '<div class="descriptions">';
 		while ( have_posts() ) : the_post();
